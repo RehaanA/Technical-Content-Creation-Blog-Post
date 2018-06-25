@@ -18,7 +18,7 @@ Additionally, here is what you need to have installed before getting started:
 
 The app that we are going to create is a simple one that accepts speech as an input from the user, which is then analyzed for tone, and then a cool face with the emotion returned will be displayed on the screen. 
 
-### Setup
+## Setup
 
 In order to get started, go ahead and create a new single view application in Xcode. You should be able to see the same screen as depicted in the screenshot below. 
 
