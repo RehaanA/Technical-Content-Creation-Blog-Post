@@ -22,7 +22,7 @@ The app that we are going to create is a simple one that accepts speech as an in
 
 In order to get started, go ahead and create a new single view application in Xcode. You should be able to see the same screen as depicted in the screenshot below. 
 
-![](images/Technical-Content-Creation-Blog-Post/Blog Project Screenshots/Initial Project Setup.png?raw=true)
+![](Technical-Content-Creation-Blog-Post/Blog Project Screenshots/Initial Project Setup.png?raw=true)
 
 Once your application is set up, we need to install and embed the frameworks that we want to use: Tone Analyzer and Speech to Text. First, within the Xcode project itself, navigate to preferences. Under the locations tab, set the option "Command Line Tools" to the latest version of Xcode that you have installed. This will ensure we have no problems installing the relevant frameworks. Please look at the screenshot below for reference.  
 
