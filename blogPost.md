@@ -25,9 +25,10 @@ In order to get started, go ahead and create a new single view application in Xc
 Once your application is set up, we need to install and embed the frameworks that we want to use: Tone Analyzer and Speech to Text. First, within the Xcode project itself, navigate to preferences. Under the locations tab, set the option "Command Line Tools" to the latest version of Xcode that you have installed. This will ensure we have no problems installing the relevant frameworks. Please look at the screenshot below for reference.  
 
 Now, we are ready to install all of the necessary frameworks. First, go ahead and install Homebrew using the following link for instructions: http://brew.sh/. Then, install Carthage by entering these two commands in terminal:
+```
 brew update
 brew install carthage
-
+```
 Then, navigate to the root directory of your project (where your .xcodeproj is located) and create an empty Cartfile there:
 touch Cartfile
 
