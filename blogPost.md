@@ -30,7 +30,9 @@ brew update
 brew install carthage
 ```
 Then, navigate to the root directory of your project (where your .xcodeproj is located) and create an empty Cartfile there:
-```touch Cartfile```
+```
+touch Cartfile
+```
 
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your Cartfile:
 github "watson-developer-cloud/swift-sdk"
