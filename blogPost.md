@@ -35,10 +35,14 @@ touch Cartfile
 ```
 
 To use the Watson Developer Cloud Swift SDK in your application, specify it in your Cartfile:
+```
 github "watson-developer-cloud/swift-sdk"
+```
 
 Finally, run the following command to build the dependencies and frameworks:
+```
 carthage update --platform iOS
+```
 
 In addition to installing the dependencies via terminal, we also need to create a service instance on the bluemix dashboard. Here are the following steps to do that:
 Log in to IBM Cloud at https://bluemix.net
