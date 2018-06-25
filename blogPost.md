@@ -1,9 +1,12 @@
 # Get Kickstarted with Watson's Swift APIs
 
 Have you always wanted to learn more about how to integrate some of Watson's awesome API's in your iOS app? Well, if you have, this is the right blog for you! After reading this blog, here is what you should be able to do:
+
 **Set up a basic application using Swift
 Incorporate the Speech to Text and Tone Analyzer APIs**
+
 Additionally, here is what you need to have installed before getting started:
+
 **Homebrew
 Carthage
 The latest version of Xcode
