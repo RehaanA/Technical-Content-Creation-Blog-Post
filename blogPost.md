@@ -59,7 +59,19 @@ In addition to installing the dependencies via terminal, we also need to create 
 
 Finally, we have to import the frameworks into the Xcode project itself. First, open up a new finder window and navigate to the directory of your project. Next, go into the Carthage folder, then the iOS folder, and you should see all of the Watson frameworks. Then, in the Xcode project, open up the "Build Phases" tab and you should be able to see the "Link Binary with Libraries" drop down. Drag and drop the Starscream, Tone Analyzer, and Speech to Text frameworks from the finder window into the dropdown. In addition, do the same for the "Embedded Binaries" drop down under the "General" tab. Follow the screenshots below if you are having some trouble with this:
 
-Implementation
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-18%20at%209.55.20%20AM.png)
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-18%20at%209.55.24%20AM.png)
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-18%20at%209.55.26%20AM.png)
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-18%20at%209.55.32%20AM.png)
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-18%20at%209.56.03%20AM.png)
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Installation/Screen%20Shot%202018-06-20%20at%209.40.07%20AM.png)
+
+## Implementation
 
 To get started, let's first start by creating a simple navigation bar. In the ViewController.swift file, we are going to add a method called setupNavBar. The implementation is as follows:
 
