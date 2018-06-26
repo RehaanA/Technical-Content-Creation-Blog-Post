@@ -74,27 +74,31 @@ Finally, we have to import the frameworks into the Xcode project itself. First, 
 ## Implementation
 
 To get started, let's first start by creating a simple navigation bar. In the ViewController.swift file, we are going to add a method called setupNavBar. The implementation is as follows:
-
+```
 func setupNavBar( ) {
-self.title = "Watson Core Services"        
-self.navigationController?.navigationBar.barStyle = .black        self.navigationController?.navigationBar.barTintColor = UIColor(red: 44/255, green: 44/255, blue: 84/255, alpha: 1.0)        
-self.navigationController?.navigationBar.tintColor = UIColor.white        
-self.view.backgroundColor = UIColor.white                
-
-self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action: #selector(self.barButtonTapped(sender:)))       
-self.navigationItem.rightBarButtonItem = self.micBarButtonItem
+    self.title = "Watson Core Services"        
+    self.navigationController?.navigationBar.barStyle = .black        
+    self.navigationController?.navigationBar.barTintColor = UIColor(red: 44/255, green: 44/255, blue: 84/255, alpha: 1.0)        
+    self.navigationController?.navigationBar.tintColor = UIColor.white        
+    self.view.backgroundColor = UIColor.white                
+  
+    self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action:           #selector(self.barButtonTapped(sender:)))       
+    self.navigationItem.rightBarButtonItem = self.micBarButtonItem
 }
 
 func barButtonTapped(sender: UIBarButtonItem) {
 
 }
-
-In addition, within the didFinishLaunchingWithOptions in the AppDelegate file, implement the following two lines of code to ensure the navigation bar will show up and that the root view controller is set:
-
+```
+In addition, within the ```didFinishLaunchingWithOptions``` in the AppDelegate file, implement the following two lines of code to ensure the navigation bar will show up and that the root view controller is set:
+```
 let navigationController = UINavigationController(rootViewController: ViewController())
 window?.rootViewController = navigationController
+```
 
-I chose to title this page "Watson Core Services," but you can pick any title that you want! In addition, make sure to declare a variable at the top of the ViewController file called micBarButtonItem of type UIBarButtonItem and don't forget to call this function in the viewDidLoad method! Go ahead and build and run the application. You should see something like this: 
+I chose to title this page "Watson Core Services," but you can pick any title that you want! In addition, make sure to declare a variable at the top of the ViewController file called micBarButtonItem of type UIBarButtonItem and don't forget to call this function in the viewDidLoad method! Go ahead and build and run the application. You should see something like this:
+
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-06-20%20at%209.23.47%20AM.png)
 
 Next, we need to make references to the service instances that we created earlier on bluemix. To do that, let's create a method called initApiReferences and call it in the viewDidLoad method. Also, don't forget to import Starscream, SpeechToTextV1, and ToneAnalyzerV3 at the top of the file. Below is the implementation:
 
