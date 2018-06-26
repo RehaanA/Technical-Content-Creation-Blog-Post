@@ -2,19 +2,19 @@
 
 Have you always wanted to learn more about how to integrate some of Watson's awesome API's in your iOS app? Well, if you have, this is the right blog for you! After reading this blog, here is what you should be able to do:
 
-**Set up a basic application using Swift**
+* **Set up a basic application using Swift**
 
-**Incorporate the Speech to Text and Tone Analyzer APIs**
+* **Incorporate the Speech to Text and Tone Analyzer APIs**
 
 Additionally, here is what you need to have installed before getting started:
 
-**Homebrew**
+* **Homebrew**
 
-**Carthage**
+* **Carthage**
 
-**The latest version of Xcode**
+* **The latest version of Xcode**
 
-**Swift 4.0+**
+* **Swift 4.0+**
 
 The app that we are going to create is a simple one that accepts speech as an input from the user, which is then analyzed for tone, and then a cool face with the emotion returned will be displayed on the screen. 
 
