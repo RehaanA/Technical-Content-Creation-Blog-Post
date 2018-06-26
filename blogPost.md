@@ -279,19 +279,13 @@ Phew! We are all done! See, it was super easy!
 In conclusion, here are the objectives that you should have met by completing this project:
 
 * Set up a basic Swift application using Xcode
-
 * Download and install frameworks into Xcode while using terminal
-
 * Make use of the Tone Analyzer and Speech to Text frameworks
-
 * Learn more about UIKit
-
 * Have fun!
 
 ## Resources
 
 * https://github.com/watson-developer-cloud/swift-sdk
-
 * https://www.ibm.com/watson/developercloud/tone-analyzer/api/v3/curl.html?curl#tone
-
 * https://console.bluemix.net/docs/services/tone-analyzer/developer-overview.html#overviewDevelopers
