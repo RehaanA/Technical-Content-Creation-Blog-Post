@@ -101,21 +101,21 @@ I chose to title this page "Watson Core Services," but you can pick any title th
 ![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-06-20%20at%209.23.47%20AM.png)
 
 Next, we need to make references to the service instances that we created earlier on bluemix. To do that, let's create a method called initApiReferences and call it in the viewDidLoad method. Also, don't forget to import Starscream, SpeechToTextV1, and ToneAnalyzerV3 at the top of the file. Below is the implementation:
-
+```
 func initApiReferences( ) {
-self.speechToText = SpeechToText(username: "USERNAME", password: "PASSWORD")        
-self.toneAnalyzer = ToneAnalyzer(username: "USERNAME", password: "PASSWORD", version: "YYYY-MM-DD")
+    self.speechToText = SpeechToText(username: "USERNAME", password: "PASSWORD")        
+    self.toneAnalyzer = ToneAnalyzer(username: "USERNAME", password: "PASSWORD", version: "YYYY-MM-DD")
 }
-
+```
 Refer to your bluemix dashboard to obtain the username and passwords for each service instance you created and then fill in the blanks in the method above.
 
 Next, let's complete the implementation of the method barButtonTapped that we created earlier. Essentially, when this button is tapped, we want the image to change to indicate that the device is recording and then actually begin recording what the user begins talking. Below is the implementation that we will use:
-
+```
 func barButtonTapped(sender: UIBarButtonItem) {
-self.stopBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "stop"), style: .plain, target: self, action: #selector(self.stopRecording(sender:)))
-       self.navigationItem.rightBarButtonItem = self.stopBarButtonItem
+    self.stopBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "stop"), style: .plain, target: self, action: #selector(self.stopRecording(sender:)))
+    self.navigationItem.rightBarButtonItem = self.stopBarButtonItem
 
-       self.beginRecording()
+    self.beginRecording()
 }
 
 func stopRecording(sender: UIBarButtonItem) {
@@ -125,51 +125,52 @@ func stopRecording(sender: UIBarButtonItem) {
 func beginRecording() {
 
 }
-
+```
 As you can see, we are using a new bar button item called stopBarButtonItem. Be sure to declare at at the top of this file along with the other variables that we are using. What we need to do next is work on the beginRecording method. Essentially, what we are going to do is recognize the microphone, log the results, and obtain the best transcript that is returned. In this particular method, we are storing the bestTranscript in the property that was declared called transcriptStr, of type String. Below is the implementation of this method:
-
+```
 func beginRecording() {
-var settings = RecognitionSettings(contentType: "audio/wav")
-       settings.interimResults = true
-       self.speechToText.recognizeMicrophone(settings: settings) { (results) in
-            var accumulator = SpeechRecognitionResultsAccumulator()
-            accumulator.add(results: results)
-            self.transcriptStr = accumulator.bestTranscript
-        }
+    var settings = RecognitionSettings(contentType: "audio/wav")
+    settings.interimResults = true
+    self.speechToText.recognizeMicrophone(settings: settings) { (results) in
+         var accumulator = SpeechRecognitionResultsAccumulator()
+         accumulator.add(results: results)
+         self.transcriptStr = accumulator.bestTranscript
+     }
 }
-
+```
 Now we are ready to implement the stopRecording method. When the user taps on the stop record button, we need to update the bar button once again, tell the Speech to Text API to stop recognizing the microphone, and then analyze the tone of the transcript using the Tone Analyzer API. Below is the implementation:
-
+```
 func stopRecording(sender: UIBarButtonItem) {
-self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action: #selector(self.barButtonTapped(sender:)))       
- self.navigationItem.rightBarButtonItem = self.micBarButtonItem                self.speechToText.stopRecognizeMicrophone()        
-self.analyzeTone(str: self.transcriptStr)
+    self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action:   #selector(self.barButtonTapped(sender:)))       
+    self.navigationItem.rightBarButtonItem = self.micBarButtonItem                
+    self.speechToText.stopRecognizeMicrophone()        
+    self.analyzeTone(str: self.transcriptStr)
 }
 
 func analyzeTone(str: String?) {
 
 }
-
+```
 Now for the fun stuff! The Tone Analyzer framework is so intricately crafted with many, many layers. So first, it is important to understand the class hierarchy before we begin with this method. Below is the hierarchy:
 
-Tone Analysis
-document_tone: Document Analysis
-tones: ToneScore[]
-score: double
-tone_id: string
-tone_name: string
-tone_categories: ToneCategory[]
-tones: ToneScore[]
-category_id: string
-category_name: string
-warning: string
-sentences_tone: Sentence Analysis
-sentence_id: Integer
-text: string
-tones: ToneScore[]
-tone_categories: ToneCategory[]
-input_from: Integer
-input_to: Integer
+** Tone Analysis
+  * document_tone: Document Analysis
+    * tones: ToneScore[]
+      * score: double
+      * tone_id: string
+      * tone_name: string
+    * tone_categories: ToneCategory[]
+      * tones: ToneScore[]
+      * category_id: string
+      * category_name: string
+    * warning: string
+  * sentences_tone: Sentence Analysis
+    * sentence_id: Integer
+    * text: string
+    * tones: ToneScore[]
+    * tone_categories: ToneCategory[]
+    * input_from: Integer
+    * input_to: Integer **
  
 
 We are going to start with an instance of Tone Analysis and access the document_tone property where we can get the array of tones and within each index, the corresponding score and name. Essentially, Watson compiles a list of multiple tones that most closely match with the transcript provided. We need to find the tone with the highest score. Below is the implementation: 
