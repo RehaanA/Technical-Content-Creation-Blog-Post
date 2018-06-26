@@ -96,11 +96,11 @@ let navigationController = UINavigationController(rootViewController: ViewContro
 window?.rootViewController = navigationController
 ```
 
-I chose to title this page "Watson Core Services," but you can pick any title that you want! In addition, make sure to declare a variable at the top of the ViewController file called micBarButtonItem of type UIBarButtonItem and don't forget to call this function in the viewDidLoad method! Go ahead and build and run the application. You should see something like this:
+I chose to title this page "Watson Core Services," but you can pick any title that you want! In addition, make sure to declare a variable at the top of the ViewController file called ```micBarButtonItem``` of type ```UIBarButtonItem``` and don't forget to call this function in the ```viewDidLoad``` method! Go ahead and build and run the application. You should see something like this:
 
 ![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-06-20%20at%209.23.47%20AM.png)
 
-Next, we need to make references to the service instances that we created earlier on bluemix. To do that, let's create a method called initApiReferences and call it in the viewDidLoad method. Also, don't forget to import Starscream, SpeechToTextV1, and ToneAnalyzerV3 at the top of the file. Below is the implementation:
+Next, we need to make references to the service instances that we created earlier on bluemix. To do that, let's create a method called ```initApiReferences``` and call it in the ```viewDidLoad``` method. Also, don't forget to import ```Starscream```, ```SpeechToTextV1```, and ```ToneAnalyzerV3``` at the top of the file. Below is the implementation:
 ```
 func initApiReferences( ) {
     self.speechToText = SpeechToText(username: "USERNAME", password: "PASSWORD")        
@@ -126,7 +126,7 @@ func beginRecording() {
 
 }
 ```
-As you can see, we are using a new bar button item called stopBarButtonItem. Be sure to declare at at the top of this file along with the other variables that we are using. What we need to do next is work on the beginRecording method. Essentially, what we are going to do is recognize the microphone, log the results, and obtain the best transcript that is returned. In this particular method, we are storing the bestTranscript in the property that was declared called transcriptStr, of type String. Below is the implementation of this method:
+As you can see, we are using a new bar button item called ```stopBarButtonItem```. Be sure to declare at at the top of this file along with the other variables that we are using. What we need to do next is work on the ```beginRecording``` method. Essentially, what we are going to do is recognize the microphone, log the results, and obtain the best transcript that is returned. In this particular method, we are storing the ```bestTranscript``` in the property that was declared called ```transcriptStr```, of type String. Below is the implementation of this method:
 ```
 func beginRecording() {
     var settings = RecognitionSettings(contentType: "audio/wav")
@@ -138,7 +138,7 @@ func beginRecording() {
      }
 }
 ```
-Now we are ready to implement the stopRecording method. When the user taps on the stop record button, we need to update the bar button once again, tell the Speech to Text API to stop recognizing the microphone, and then analyze the tone of the transcript using the Tone Analyzer API. Below is the implementation:
+Now we are ready to implement the ```stopRecording``` method. When the user taps on the stop record button, we need to update the bar button once again, tell the Speech to Text API to stop recognizing the microphone, and then analyze the tone of the transcript using the Tone Analyzer API. Below is the implementation:
 ```
 func stopRecording(sender: UIBarButtonItem) {
     self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action:   #selector(self.barButtonTapped(sender:)))       
@@ -153,50 +153,50 @@ func analyzeTone(str: String?) {
 ```
 Now for the fun stuff! The Tone Analyzer framework is so intricately crafted with many, many layers. So first, it is important to understand the class hierarchy before we begin with this method. Below is the hierarchy:
 
-** Tone Analysis
-  * document_tone: Document Analysis
-    * tones: ToneScore[]
-      * score: double
-      * tone_id: string
-      * tone_name: string
-    * tone_categories: ToneCategory[]
-      * tones: ToneScore[]
-      * category_id: string
-      * category_name: string
-    * warning: string
-  * sentences_tone: Sentence Analysis
-    * sentence_id: Integer
-    * text: string
-    * tones: ToneScore[]
-    * tone_categories: ToneCategory[]
-    * input_from: Integer
-    * input_to: Integer **
+**Tone Analysis**
+  * **document_tone: Document Analysis**
+    * **tones: ToneScore[]**
+      * **score: double**
+      * **tone_id: string**
+      * **tone_name: string**
+    * **tone_categories: ToneCategory[]**
+      * **tones: ToneScore[]**
+      * **category_id: string**
+      * **category_name: string**
+    * **warning: string**
+  * **sentences_tone: Sentence Analysis**
+    * **sentence_id: Integer**
+    * **text: string**
+    * **tones: ToneScore[]**
+    * **tone_categories: ToneCategory[]**
+    * **input_from: Integer**
+    * **input_to: Integer**
  
 
 We are going to start with an instance of Tone Analysis and access the document_tone property where we can get the array of tones and within each index, the corresponding score and name. Essentially, Watson compiles a list of multiple tones that most closely match with the transcript provided. We need to find the tone with the highest score. Below is the implementation: 
-
+```
 func analyzeTone(str: String?) {
-if str != nil {           
- self.toneAnalyzer.tone(text: str!) { (toneAnalysis) in               
- let tones = toneAnalysis.documentTone.tones!               
- if !tones.isEmpty {                   
- let maxToneScore = tones.lazy.map{ $0.score }.max()                    
- var maxToneScoreIndex = Int()                   
- var i = 0                   
- for tone in tones {                       
- if tone.score == maxToneScore {                            
-maxToneScoreIndex = i                           
- break                        
-}                       
- i += 1                   
- }                   
- self.displayImageWithTone(toneStr: tones[maxToneScoreIndex].toneName)                
-}            
-      }        
+    if str != nil {           
+      self.toneAnalyzer.tone(text: str!) { (toneAnalysis) in               
+      let tones = toneAnalysis.documentTone.tones!               
+      if !tones.isEmpty {                   
+        let maxToneScore = tones.lazy.map{ $0.score }.max()                    
+        var maxToneScoreIndex = Int()                   
+        var i = 0                   
+        for tone in tones {                       
+          if tone.score == maxToneScore {                            
+          maxToneScoreIndex = i                           
+          break                        
+        }                       
+        i += 1                   
+      }                   
+      self.displayImageWithTone(toneStr: tones[maxToneScoreIndex].toneName)                
+    }            
+  }        
 }
-
-So let's go through this method step by step by starting with the function header. It is important that we declare str as an optional String, because if the user does not say anything into the microphone, we would be passing nil. Next, we call the function tone and we have access to a toneAnalysis property within the resulting closure. Using that property, we access the tones array and obtain the highest tone score. Then, we loop through the array and find the corresponding index of that tone so that we can access its name. Finally, we call the displayImageWithTone method which we will discuss below.
-
+```
+So let's go through this method step by step by starting with the function header. It is important that we declare str as an optional String, because if the user does not say anything into the microphone, we would be passing nil. Next, we call the function tone and we have access to a ```toneAnalysis``` property within the resulting closure. Using that property, we access the tones array and obtain the highest tone score. Then, we loop through the array and find the corresponding index of that tone so that we can access its name. Finally, we call the ```displayImageWithTone``` method which we will discuss below.
+```
 func displayImageWithTone(toneStr: String) {
         let image = self.image(tone: toneStr)
         let str = self.labelText(tone: toneStr)
@@ -223,9 +223,9 @@ func displayImageWithTone(toneStr: String) {
             self.view.addConstraint(NSLayoutConstraint(item: self.label, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1.0, constant: 50))
         }
     }
-
+```
 This is a very basic method. We are simply displaying an image view and a label in the middle of the screen using auto layout and constraints. This is Apple's way of scaling user interfaces with all of the different screen sizes within the Apple ecosystem. Within this function we are calling two other methods, image and labelText. Both of these accept Strings as inputs and the correct image and text are returned depending on the toneName. Their implementations are below: 
-
+```
 func image(tone: String) -> UIImage {
         if tone == "Anger" {
             return  imageLiteral(resourceName: "angry")
@@ -269,12 +269,12 @@ func image(tone: String) -> UIImage {
             return "Unknown emotion"
         }
     } 
-
+```
 Note: One way to improve the code above would be to combine the two methods and return a tuple instead with a UIImage and String. You can also import any images you would like into your Xcode project.  
 
 Phew! We are all done! See, it was super easy! 
 
-Takeaways
+## Takeaways
 
 In conclusion, here are the objectives that you should have met by completing this project:
 Set up a basic Swift application using Xcode
@@ -283,7 +283,7 @@ Make use of the Tone Analyzer and Speech to Text frameworks
 Learn more about UIKit
 Have fun!
 
-Resources
+## Resources
 
 https://github.com/watson-developer-cloud/swift-sdk
 https://www.ibm.com/watson/developercloud/tone-analyzer/api/v3/curl.html?curl#tone
