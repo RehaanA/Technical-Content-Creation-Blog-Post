@@ -50,12 +50,12 @@ In addition to installing the dependencies via terminal, we also need to create 
 
 1. Log in to IBM Cloud at https://bluemix.net
 2. Create a service instance:
-       ..* From the dashboard, select "Use Services or APIs"
-       ..* Select the service you want to use
-       ..* Click "Create"
+   * From the dashboard, select "Use Services or APIs"
+       * Select the service you want to use
+       * Click "Create"
 3. Copy your service credentials:
-       ..* Click "Service Credentials" on the left side of the page 
-       ..* Copy service's username and password 
+       * Click "Service Credentials" on the left side of the page 
+       * Copy service's username and password 
 
 Finally, we have to import the frameworks into the Xcode project itself. First, open up a new finder window and navigate to the directory of your project. Next, go into the Carthage folder, then the iOS folder, and you should see all of the Watson frameworks. Then, in the Xcode project, open up the "Build Phases" tab and you should be able to see the "Link Binary with Libraries" drop down. Drag and drop the Starscream, Tone Analyzer, and Speech to Text frameworks from the finder window into the dropdown. In addition, do the same for the "Embedded Binaries" drop down under the "General" tab. Follow the screenshots below if you are having some trouble with this:
 
