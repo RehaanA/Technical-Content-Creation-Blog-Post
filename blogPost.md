@@ -187,8 +187,8 @@ func analyzeTone(str: String?) {
         var i = 0                   
         for tone in tones {                       
           if tone.score == maxToneScore {                            
-          maxToneScoreIndex = i                           
-          break                        
+            maxToneScoreIndex = i                           
+            break                        
         }                       
         i += 1                   
       }                   
