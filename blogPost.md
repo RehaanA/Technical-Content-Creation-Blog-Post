@@ -78,7 +78,7 @@ Finally, we have to import the frameworks into the Xcode project itself. First, 
 ## Implementation
 
 To get started, let's first start by creating a simple navigation bar. In the ViewController.swift file, we are going to add a method called setupNavBar. The implementation is as follows:
-``` Swift
+``` swift
 func setupNavBar( ) {
     self.title = "Watson Core Services"        
     self.navigationController?.navigationBar.barStyle = .black        
