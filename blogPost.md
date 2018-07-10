@@ -76,7 +76,7 @@ Finally, we have to import the frameworks into the Xcode project itself. First, 
 ## Implementation
 
 To get started, let's first start by creating a simple navigation bar. In the ViewController.swift file, we are going to add a method called setupNavBar. The implementation is as follows:
-```
+``` Swift
 func setupNavBar( ) {
     self.title = "Watson Core Services"        
     self.navigationController?.navigationBar.barStyle = .black        
@@ -93,7 +93,7 @@ func barButtonTapped(sender: UIBarButtonItem) {
 }
 ```
 In addition, within the ```didFinishLaunchingWithOptions``` in the AppDelegate file, implement the following two lines of code to ensure the navigation bar will show up and that the root view controller is set:
-```
+```swift
 let navigationController = UINavigationController(rootViewController: ViewController())
 window?.rootViewController = navigationController
 ```
@@ -103,7 +103,7 @@ I chose to title this page "Watson Core Services," but you can pick any title th
 ![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-06-20%20at%209.23.47%20AM.png)
 
 Next, we need to make references to the service instances that we created earlier on bluemix. To do that, let's create a method called ```initApiReferences``` and call it in the ```viewDidLoad``` method. Also, don't forget to import ```Starscream```, ```SpeechToTextV1```, and ```ToneAnalyzerV3``` at the top of the file. Below is the implementation:
-```
+```swift
 func initApiReferences( ) {
     self.speechToText = SpeechToText(username: "USERNAME", password: "PASSWORD")        
     self.toneAnalyzer = ToneAnalyzer(username: "USERNAME", password: "PASSWORD", version: "YYYY-MM-DD")
@@ -112,7 +112,7 @@ func initApiReferences( ) {
 Refer to your bluemix dashboard to obtain the username and passwords for each service instance you created and then fill in the blanks in the method above.
 
 Next, let's complete the implementation of the method barButtonTapped that we created earlier. Essentially, when this button is tapped, we want the image to change to indicate that the device is recording and then actually begin recording what the user begins talking. Below is the implementation that we will use:
-```
+```swift
 func barButtonTapped(sender: UIBarButtonItem) {
     self.stopBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "stop"), style: .plain, target: self, action: #selector(self.stopRecording(sender:)))
     self.navigationItem.rightBarButtonItem = self.stopBarButtonItem
@@ -129,7 +129,7 @@ func beginRecording() {
 }
 ```
 As you can see, we are using a new bar button item called ```stopBarButtonItem```. Be sure to declare at at the top of this file along with the other variables that we are using. What we need to do next is work on the ```beginRecording``` method. Essentially, what we are going to do is recognize the microphone, log the results, and obtain the best transcript that is returned. In this particular method, we are storing the ```bestTranscript``` in the property that was declared called ```transcriptStr```, of type String. Below is the implementation of this method:
-```
+```swift
 func beginRecording() {
     var settings = RecognitionSettings(contentType: "audio/wav")
     settings.interimResults = true
@@ -141,7 +141,7 @@ func beginRecording() {
 }
 ```
 Now we are ready to implement the ```stopRecording``` method. When the user taps on the stop record button, we need to update the bar button once again, tell the Speech to Text API to stop recognizing the microphone, and then analyze the tone of the transcript using the Tone Analyzer API. Below is the implementation:
-```
+```swift
 func stopRecording(sender: UIBarButtonItem) {
     self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action:   #selector(self.barButtonTapped(sender:)))       
     self.navigationItem.rightBarButtonItem = self.micBarButtonItem                
@@ -176,7 +176,7 @@ Now for the fun stuff! The Tone Analyzer framework is so intricately crafted wit
  
 
 We are going to start with an instance of Tone Analysis and access the document_tone property where we can get the array of tones and within each index, the corresponding score and name. Essentially, Watson compiles a list of multiple tones that most closely match with the transcript provided. We need to find the tone with the highest score. Below is the implementation: 
-```
+```swift
 func analyzeTone(str: String?) {
     if str != nil {           
       self.toneAnalyzer.tone(text: str!) { (toneAnalysis) in               
@@ -198,7 +198,7 @@ func analyzeTone(str: String?) {
 }
 ```
 So let's go through this method step by step by starting with the function header. It is important that we declare str as an optional String, because if the user does not say anything into the microphone, we would be passing nil. Next, we call the function tone and we have access to a ```toneAnalysis``` property within the resulting closure. Using that property, we access the tones array and obtain the highest tone score. Then, we loop through the array and find the corresponding index of that tone so that we can access its name. Finally, we call the ```displayImageWithTone``` method which we will discuss below.
-```
+```swift
 func displayImageWithTone(toneStr: String) {
         let image = self.image(tone: toneStr)
         let str = self.labelText(tone: toneStr)
@@ -227,7 +227,7 @@ func displayImageWithTone(toneStr: String) {
     }
 ```
 This is a very basic method. We are simply displaying an image view and a label in the middle of the screen using auto layout and constraints. This is Apple's way of scaling user interfaces with all of the different screen sizes within the Apple ecosystem. Within this function we are calling two other methods, image and labelText. Both of these accept Strings as inputs and the correct image and text are returned depending on the toneName. Their implementations are below: 
-```
+```swift
 func image(tone: String) -> UIImage {
         if tone == "Anger" {
             return  imageLiteral(resourceName: "angry")
