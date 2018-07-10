@@ -16,7 +16,9 @@ Additionally, here is what you need to have installed before getting started:
 
 * **Swift 4.0+**
 
-The app that we are going to create is a simple one that accepts speech as an input from the user, which is then analyzed for tone, and then a cool face with the emotion returned will be displayed on the screen. 
+The app that we are going to create is a simple one that accepts speech as an input from the user, which is then analyzed for tone, and then a cool face with the emotion returned will be displayed on the screen.
+
+**Estimated Time:** This how-to article should take from anywhere between 1 and 2 hours to complete with a functioning app at the end. 
 
 ## Setup
 
