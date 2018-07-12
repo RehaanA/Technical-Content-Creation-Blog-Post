@@ -202,8 +202,8 @@ func analyzeTone(str: String?) {
 So let's go through this method step by step by starting with the function header. It is important that we declare str as an optional String, because if the user does not say anything into the microphone, we would be passing nil. Next, we call the function tone and we have access to a ```toneAnalysis``` property within the resulting closure. Using that property, we access the tones array and obtain the highest tone score. Then, we loop through the array and find the corresponding index of that tone so that we can access its name. Finally, we call the ```displayImageWithTone``` method which we will discuss below.
 ```swift
 func displayImageWithTone(toneStr: String) {
-        let image = self.image(tone: toneStr)
-        let str = self.labelText(tone: toneStr)
+        let image = self.imageAndText(tone: toneStr).0
+        let str = self.imageAndText(tone: toneStr).1
         DispatchQueue.main.async {
             self.imageView.image = image
             self.imageView.alpha = 1
@@ -230,49 +230,28 @@ func displayImageWithTone(toneStr: String) {
 ```
 This is a very basic method. We are simply displaying an image view and a label in the middle of the screen using auto layout and constraints. This is Apple's way of scaling user interfaces with all of the different screen sizes within the Apple ecosystem. Within this function we are calling two other methods, image and labelText. Both of these accept Strings as inputs and the correct image and text are returned depending on the toneName. Their implementations are below: 
 ```swift
-func image(tone: String) -> UIImage {
-        if tone == "Anger" {
-            return  imageLiteral(resourceName: "angry")
-        } else if tone == "Fear" {
-            return  imageLiteral(resourceName: "fear")
-        } else if tone == "Joy" {
-            return  imageLiteral(resourceName: "joy")
-        } else if tone == "Sadness" {
-            return  imageLiteral(resourceName: "sadness")
-        } else if tone == "Disgust" {
-            return  imageLiteral(resourceName: "disgust")
-        } else if tone == "Analytical" {
-            return  imageLiteral(resourceName: "analytical")
-        } else if tone == "Confident" {
-            return  imageLiteral(resourceName: "confident")
-        } else if tone == "Tentative" {
-            return  imageLiteral(resourceName: "tentative")
-        }
-        return UIImage()
-    }
-    
-    func labelText(tone: String) -> String {
-        switch tone {
+func imageAndText(tone: String) -> (UIImage, String) {
+     switch tone {
         case "Anger":
-            return "Anger: WHY SO ANGRY?"
+            return (#imageLiteral(resourceName: "angry"), "Anger: WHY SO ANGRY?")
         case "Fear":
-            return "Fear: DON'T BE SCARED!"
+            return (#imageLiteral(resourceName: "angry"), "Fear: DON'T BE SCARED!")
         case "Joy":
-            return "Joy: SPREAD THE JOY!"
+            return (#imageLiteral(resourceName: "joy"), "Joy: SPREAD THE JOY!")
         case "Sadness":
-            return "Sadness: DON'T BE SO BLUE!"
+            return (#imageLiteral(resourceName: "sadness"), "Sadness: DON'T BE SO BLUE!")
         case "Disgust":
-            return "Disgust: THAT WAS REVOLTING"
+            return (#imageLiteral(resourceName: "disgust"), "Disgust: THAT WAS REVOLTING")
         case "Analytical":
-            return "Analytical: TRANSFER SOME OF YOUR KNOWLEDGE TO ME!"
+            return (#imageLiteral(resourceName: "analytical"), "Analytical: TRANSFER SOME OF YOUR KNOWLEDGE TO ME!")
         case "Confident":
-            return "Confident: YOUR CONFIDENCE IS CONTAGIOUS!"
+            return (#imageLiteral(resourceName: "confident"), "Confident: YOUR CONFIDENCE IS CONTAGIOUS!")
         case "Tentative":
-            return "Tentative: DON'T BE HESITANT!"
+            return (#imageLiteral(resourceName: "tentative"), "Tentative: DON'T BE HESITANT!")
         default:
-            return "Unknown emotion"
-        }
-    } 
+            return (UIImage(), "Unknown emotion")
+     }
+} 
 ```
 Note: One way to improve the code above would be to combine the two methods and return a tuple instead with a UIImage and String. You can also import any images you would like into your Xcode project.  
 
