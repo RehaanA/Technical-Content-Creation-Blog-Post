@@ -253,8 +253,7 @@ func imageAndText(tone: String) -> (UIImage, String) {
      }
 } 
 ```
-Note: One way to improve the code above would be to combine the two methods and return a tuple instead with a UIImage and String. You can also import any images you would like into your Xcode project.  
-
+  
 Phew! We are all done! See, it was super easy! 
 
 ## Takeaways
