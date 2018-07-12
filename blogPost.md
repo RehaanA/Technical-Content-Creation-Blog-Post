@@ -228,7 +228,7 @@ func displayImageWithTone(toneStr: String) {
         }
     }
 ```
-This is a very basic method. We are simply displaying an image view and a label in the middle of the screen using auto layout and constraints. This is Apple's way of scaling user interfaces with all of the different screen sizes within the Apple ecosystem. Within this function we are calling two other methods, image and labelText. Both of these accept Strings as inputs and the correct image and text are returned depending on the toneName. Their implementations are below: 
+This is a very basic method. We are simply displaying an image view and a label in the middle of the screen using auto layout and constraints. This is Apple's way of scaling user interfaces with all of the different screen sizes within the Apple ecosystem. Within this function we are calling one other method, ```imageAndText```, which accepts a String as an input and the correct image and text are returned depending on the toneName in the form of a tuple. Their implementations are below: 
 ```swift
 func imageAndText(tone: String) -> (UIImage, String) {
      switch tone {
