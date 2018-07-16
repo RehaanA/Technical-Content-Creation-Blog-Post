@@ -271,3 +271,5 @@ In conclusion, here are the objectives that you should have met by completing th
 * https://github.com/watson-developer-cloud/swift-sdk
 * https://www.ibm.com/watson/developercloud/tone-analyzer/api/v3/curl.html?curl#tone
 * https://console.bluemix.net/docs/services/tone-analyzer/developer-overview.html#overviewDevelopers
+
+Additionally, here is the link to all the code in a Github repository: https://github.com/RehaanA/Watson-Swift-APIs
