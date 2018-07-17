@@ -6,6 +6,8 @@ Have you always wanted to learn more about how to integrate some of Watson's awe
 
 * **Incorporate the Speech to Text and Tone Analyzer APIs**
 
+* **Get familiarized with the command line
+
 Additionally, here is what you need to have installed before getting started:
 
 * **Homebrew**
@@ -15,6 +17,12 @@ Additionally, here is what you need to have installed before getting started:
 * **The latest version of Xcode**
 
 * **Swift 4.0+**
+
+Finally, here are some prerequisite skills that you should have before getting started:
+
+* **Proficient with the Swift programming language**
+
+* **Familar with the Xcode IDE**
 
 The app that we are going to create is a simple one that accepts speech as an input from the user, which is then analyzed for tone, and then a cool face with the emotion returned will be displayed on the screen.
 
