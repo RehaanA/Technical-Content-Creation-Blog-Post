@@ -6,7 +6,7 @@ Have you always wanted to learn more about how to integrate some of Watson's awe
 
 * **Incorporate the Speech to Text and Tone Analyzer APIs**
 
-* **Get familiarized with the command line
+* **Get familiarized with the command line**
 
 Additionally, here is what you need to have installed before getting started:
 
