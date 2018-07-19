@@ -58,7 +58,7 @@ Finally, run the following command to build the dependencies and frameworks:
 carthage update --platform iOS
 ```
 
-In addition to installing the dependencies via terminal, we also need to create a service instance on the bluemix dashboard. Here are the following steps to do that:
+In addition to installing the dependencies via terminal, we also need to create a service instance on the IBM Cloud dashboard. Here are the following steps to do that:
 
 1. Log in to IBM Cloud at https://bluemix.net
 2. Create a service instance:
