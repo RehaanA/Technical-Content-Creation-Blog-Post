@@ -268,7 +268,7 @@ Here are a couple of screenshots of the final product:
 
 ![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-07-23%20at%2011.42.31%20AM.png)
 
-![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-07-23%20at%2011.42.37%20AM.png)
+![](https://github.com/RehaanA/Technical-Content-Creation-Blog-Post/blob/master/Blog%20Project%20Screenshots/Screen%20Shot%202018-07-23%20at%2011.42.37%20AM.png) 
 
 ## Takeaways
 
