@@ -94,7 +94,7 @@ func setupNavBar( ) {
     self.navigationController?.navigationBar.tintColor = UIColor.white        
     self.view.backgroundColor = UIColor.white                
   
-    self.micBarButtonItem = UIBarButtonItem(image:  imageLiteral(resourceName: "mic"), style: .plain, target: self, action:           #selector(self.barButtonTapped(sender:)))       
+    self.micBarButtonItem = UIBarButtonItem(image:  #imageLiteral(resourceName: "mic"), style: .plain, target: self, action:           #selector(self.barButtonTapped(sender:)))       
     self.navigationItem.rightBarButtonItem = self.micBarButtonItem
 }
 
